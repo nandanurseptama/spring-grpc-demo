@@ -1,8 +1,11 @@
 # GRPC DEMO
+
 A grpc service demo with java spring boot.
 
 ## Protobuf Definition
+
 When it comes to grpc service, you must be defined your service proto first. It's like an api contract.
+
 ```proto
 syntax = "proto3";
 
@@ -40,4 +43,24 @@ message HelloRequest {
 message HelloReply {
   string message = 1;
 }
+```
+
+## Build
+Build service and generated class
+
+```shell
+./mvnw clean package
+```
+
+## Running
+Run service as usual spring boot
+
+```shell
+./mvnw spring-boot:run
+```
+
+You can try it out using a gRPC client like `grpcurl`:
+
+```shell
+grpcurl -d '{"message":"Hi"}' -plaintext localhost:9090 Simple.SayHello
 ```
