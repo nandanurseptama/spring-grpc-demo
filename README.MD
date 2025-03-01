@@ -1,0 +1,38 @@
+# GRPC DEMO
+A grpc service demo with java spring boot.
+
+## Protobuf Definition
+When it comes to grpc service, you must be defined your service proto first. It's like an api contract.
+```proto
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.springframework.grpc.sample.proto";
+option java_outer_classname = "HelloWorldProto";
+
+// The greeting service definition.
+service Simple {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {
+  }
+
+  // Send a greeting and server response multiple times
+  rpc ServerStreamHello(HelloRequest) returns (stream HelloReply) {}
+
+  // Client send multiple message and server response one time
+  rpc ClientStreamHello(stream HelloRequest) returns (HelloReply) {}
+
+  // Both server and client can send message multiple times
+  rpc BidirectionalStreamHello(stream HelloRequest) returns (stream HelloReply) {}
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string message = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+}
+```
